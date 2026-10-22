@@ -18,7 +18,7 @@ Red are the lowest of the low. Service to Friend Computer may see you promoted. 
 
 You play a red level troubleshooter - someone employed to shoot trouble. Literally. Unfortunately you are one of the many traitors the Computer is seeking to eradicate. You will of course need to keep this secret in order to survive.
 
-The game understands the usual Verb / Noun / Noun / Adverb type of arrangement. Word order doesn't really matter. Extra words are ignored. You can shorten a lot of the words to the first three letters.
+The game understands the usual Verb / Noun / Noun / Adverb type of arrangement. Word order doesn't really matter. Extra words are ignored. You can shorten a lot of the words to the first three letters. You could, for example, type 'Shoot the werewolf with the silver bullet'. But don't worry, there are no werewolves in Alpha Complex. Friend Computer says so. 
 
 Remember:  
 Stay alert.  
