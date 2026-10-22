@@ -27,3 +27,5 @@ Remember:
 Stay alert.  
 Trust no-one.  
 Keep your laser handy.
+
+On a technical note there is a lot of disc access which I am hoping to improve on. Unfortunately the compiled .COM is about 34K (which is noticeably larger than the equivalent compiled program on the BBC Micro, which was less than 20K) meaning there is not a huge amount of RAM left. The message file is 29K so short of some very efficient compression there is no way that will all fit. Messages are therefore loaded on demand.
