@@ -521,8 +521,6 @@ int main() {
   // Seed the generator with the final unique value
   srand(user_seed);
 
-
-
   while (anothergame == 1) {
 
     memset( & ctr[0], 0, sizeof(ctr)); /*initialise the counter array to 0*/
@@ -538,9 +536,11 @@ int main() {
     andActive = false;
     initialiseGame();
 
-      if (choice == '2') {
+    if (choice == '2') {
     loadGame("SAVEM.DAT");
     }
+
+    mode(MODE);
 
     while (exitFlag == 0) {
       doneFlag = 0;
