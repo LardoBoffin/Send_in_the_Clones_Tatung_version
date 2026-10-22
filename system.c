@@ -131,10 +131,10 @@ int inInv(int number) {
 int available(int roomNumber, int number ) {
   //printf("\nChecking if object %d is available in room %d\n",number,roomNumber);
   if (here(number, roomNumber) == true || inInv(number) == true) {
-    printf("\nObject %d is available in room %d\n",number,roomNumber);
+    //printf("\nObject %d is available in room %d\n",number,roomNumber);
     return true;
   }
-  printf("\nObject %d is not available in room %d\n",number,roomNumber);
+  //printf("\nObject %d is not available in room %d\n",number,roomNumber);
   return false;
 }
 
@@ -185,20 +185,20 @@ int again(void) {
 //   }
 // }
 
-void reverseUpper(char * s, int start, int length) {
-  int c, i, j;
+// void reverseUpper(char * s, int start, int length) {
+//   int c, i, j;
 
-  for (i = 0, j = length; i < j; i++) {
-    s[start + i] = toupper(s[start + i]);
-  }
+//   for (i = 0, j = length; i < j; i++) {
+//     s[start + i] = toupper(s[start + i]);
+//   }
 
-  for (i = 0, j = length - 1; i < j; i++, j--) {
-    c = s[start + i];
-    s[start + i] = s[start + j];
-    s[start + j] = c;
-  }
+//   for (i = 0, j = length - 1; i < j; i++, j--) {
+//     c = s[start + i];
+//     s[start + i] = s[start + j];
+//     s[start + j] = c;
+//   }
 
-}
+// }
 
 void toUpperCase(char * s) {
   /* step through each character converting to upper case */

@@ -59,23 +59,23 @@ int getSizeOfFile(char * filename) {
   return size;
 }
 
-int getSizeOfFileByBytes(char * filename) {
+// int getSizeOfFileByBytes(char * filename) {
 
-  long byte_count = 0;
-  int ch;
+//   long byte_count = 0;
+//   int ch;
 
-  FILE * f = fopen(filename, "rb");
-  if (!f) {
-    printf("File not found %s \n", filename);
-    return -1;
-  }
+//   FILE * f = fopen(filename, "rb");
+//   if (!f) {
+//     printf("File not found %s \n", filename);
+//     return -1;
+//   }
 
-  // Note: ch must be an int (not a char) to safely match EOF
-  while ((ch = fgetc(f)) != EOF) {
-    byte_count++;
-  }
-  return byte_count;
-}
+//   // Note: ch must be an int (not a char) to safely match EOF
+//   while ((ch = fgetc(f)) != EOF) {
+//     byte_count++;
+//   }
+//   return byte_count;
+// }
 
 long readIndex(int recordNumber, char * fileName, int offSetValue) {
   /* reads an integer from the index file */
@@ -110,38 +110,38 @@ long readIndex(int recordNumber, char * fileName, int offSetValue) {
 
 }
 
-long readIndexRoom(int recordNumber, char * fileName) {
-  /* reads an integer from the index file */
+// long readIndexRoom(int recordNumber, char * fileName) {
+//   /* reads an integer from the index file */
 
-  long index;
-  int number;
+//   long index;
+//   int number;
 
-  //printf(fileName);printf("\n");
-  //printf("rec n : %d\n",recordNumber);
+//   //printf(fileName);printf("\n");
+//   //printf("rec n : %d\n",recordNumber);
 
-  FILE * fileptr;
-  index = (((long) recordNumber - 1) * 2) + 4;
-  number = 0;
+//   FILE * fileptr;
+//   index = (((long) recordNumber - 1) * 2) + 4;
+//   number = 0;
 
-  //printf("index %lu\n",index);
+//   //printf("index %lu\n",index);
 
-  fileptr = fopen(fileName, "rb");
-  if (fileptr == NULL) {
-    printf("File not found %d", fileName);
-    return 0;
-  }
+//   fileptr = fopen(fileName, "rb");
+//   if (fileptr == NULL) {
+//     printf("File not found %d", fileName);
+//     return 0;
+//   }
 
-  fseek(fileptr, index, SEEK_SET);
+//   fseek(fileptr, index, SEEK_SET);
 
-  //get first byte
-  number = fgetc(fileptr) * 256;
-  //get second byte
-  number = number + fgetc(fileptr);
-  //printf("Pos in file %d\n",number);
-  fclose(fileptr);
-  return (long) number;
+//   //get first byte
+//   number = fgetc(fileptr) * 256;
+//   //get second byte
+//   number = number + fgetc(fileptr);
+//   //printf("Pos in file %d\n",number);
+//   fclose(fileptr);
+//   return (long) number;
 
-}
+// }
 
 void loadSystemMessages() {
   long index;
@@ -262,7 +262,7 @@ void loadWords(int type) {
       i = nouns[c];
       c = c + 2;
       l = nouns[c];
-      reverseUpper(nouns, c + 1, l);
+     // reverseUpper(nouns, c + 1, l);
 
       /* step through each character of the word based on length */
       o = 1;
@@ -288,7 +288,7 @@ void loadWords(int type) {
       i = verbs[c];
       c = c + 2;
       l = verbs[c];
-      reverseUpper(verbs, c + 1, l);
+     // reverseUpper(verbs, c + 1, l);
 
       /* step through each character of the word based on length */
       o = 1;
@@ -314,7 +314,7 @@ void loadWords(int type) {
       i = adverbs[c];
       c = c + 2;
       l = adverbs[c];
-      reverseUpper(adverbs, c + 1, l);
+     // reverseUpper(adverbs, c + 1, l);
 
       /* step through each character of the word based on length */
       o = 1;
