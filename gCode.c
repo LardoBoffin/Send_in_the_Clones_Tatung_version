@@ -143,7 +143,7 @@ void setAchievements(int number) {
 }
 
 void WaitForKey() {
-    printf("\nPress any key to continue...");
+    printf("\nPress any key to continue...\n");
   while (getk() == 0) { }
 }
 
@@ -1354,6 +1354,7 @@ if (verb==35 && room>3) {
     putchar('\n');
     showMessage(182);
     showMessage(122+get(MUTATION));
+    printf("\nYou are Clone %d of 8.\n", get(CLONE));
     return true;
 }
 if (verb==48 && noun==10) {

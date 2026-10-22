@@ -546,7 +546,7 @@ int main() {
       doneFlag = 0;
       randomNumber = rand() % 101;
       beforeRoomDescription();
-      printf("\nRoom : %d\n", room);
+      //printf("\nRoom : %d\n", room);
 
       if (room != lastRoom) {
         //if you moved to a new room

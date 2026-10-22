@@ -8,6 +8,7 @@ load and process a file containing commands to speed up testing
 
 switch dark to room based environment variable
 
+status should give clone number
 
 
 
