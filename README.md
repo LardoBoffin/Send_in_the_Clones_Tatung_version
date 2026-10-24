@@ -21,7 +21,7 @@ You play a red level trouble-shooter - someone employed to shoot trouble. Litera
 
 In this outing you will need to figure out what Friend Computer actually wants you to do. Then you will need to do it while avoiding all the dangers the world can throw at you.
 
-The game understands the usual Verb / Noun / Noun / Adverb type of arrangement. Word order doesn't really matter. Extra words are ignored. You can shorten a lot of the words to the first three letters. You could, for example, type 'Shoot the werewolf with the silver bullet'. But don't worry, there are no werewolves in Alpha Complex. Friend Computer says so. 
+The game understands the usual Verb / Noun / Noun / Adverb type of arrangement. Word order doesn't really matter. Extra words are ignored. You can shorten some of the words to the first three letters. You could, for example, type 'Shoot the werewolf with the silver bullet'. But don't worry, there are no werewolves in Alpha Complex. Friend Computer says so. 
 
 Remember:  
 Stay alert.  
