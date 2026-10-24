@@ -305,7 +305,7 @@ int parseWord(int type) {
 
   wordLen = strlen(word);
 
-  for (x = 0; x < listLen; x++) {
+  for (x = 3; x < listLen; x++) {
     retVal = list[x];
     x = x + 2;
     testLen = list[x];
@@ -593,6 +593,7 @@ int main() {
         andMessage[0] = '\0';
       }
     }
+    choice=1;
     anothergame = again();
   }
 

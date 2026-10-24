@@ -271,7 +271,6 @@ int rm11(void)
             showMessage(218);
             putchar('\n');
             putchar('\n');
-
             room = 48;
             lastRoom = room;
             getRoom(room);
@@ -384,6 +383,7 @@ int rm22(void)
         showMessage(137);
         setAchievements(16);
         moveObject(3, 0);
+        off(ROPE);  //allow the player to take the rope again
         return 1;
     }
 
@@ -392,6 +392,7 @@ int rm22(void)
         showMessage(140);
         setAchievements(16);
         moveObject(3, 0);
+        off(ROPE);      //allow the player to take the rope again
         return 1;
     }
 
@@ -694,7 +695,7 @@ if (isOn(LATECTR) && !isOn(BRIEFING)) {
     inc(7);
 }
 if (room==5) {
-    if (get(LATECTR)<4 && !isOn(BRIEFING)) {
+    if (get(LATECTR)<6 && !isOn(BRIEFING)) {
         on(BRIEFING);
         inc(31);
         showMessage(78);
@@ -1035,14 +1036,14 @@ if (room==41 && verb==20 && noun==0) {
     }
 }
 if (room==43 && verb==24) {
-    if (available(room,1) && (get(SKILL)==2 || get(SOCEITY)==2 || get(MUTATION)==1)) {
+    if (available(room,1) && (get(SKILL)==2 || get(SOCEITY)==2 || get(MUTATION)==1) && !isOn(BOTDEAD)) {
         showMessage(176);
         on(BOTDEAD);
         stg(6);
         return true;
     }
 }
-if (room==43 && verb==24) {
+if (room==43 && verb==24 && !isOn(BOTDEAD)) {
     if (available(room,1)) {
         showMessage(177);
         die();
@@ -1068,11 +1069,11 @@ if (room==44 && verb==20 && noun==0) {
     }
 }
 if (room==45 && verb==33 && noun==5) {
-    if (available(room,5) && !isOn(44) && available(room,6)) {
+    if (available(room,5) && !isOn(RUBBLECLEARED) && available(room,6)) {
         if (get(SOCEITY)==3){
             showMessage(262);
             setAchievements(8);
-            on(44);
+            on(RUBBLECLEARED);
             return true;
         }
         else
@@ -1082,11 +1083,11 @@ if (room==45 && verb==33 && noun==5) {
         }
     }
 }
-if (room==45 && verb==2 && !isOn(44)) {
+if (room==45 && verb==2 && !isOn(RUBBLECLEARED)) {
     showMessage(246);
     return true;
 }
-if (room==45 && verb==2 && isOn(44)) {
+if (room==45 && verb==2 && isOn(RUBBLECLEARED)) {
     gotoRoom(46);
     return true;
 }
@@ -1100,13 +1101,13 @@ if (room==47 && (noun==37 || noun==34 || nounTwo==37 || nounTwo==34) && (verb==3
     }
 }
 if (room==47 && verb==3) {
-    if (! isOn(43)) {
+    if (! isOn(SCIENCEDOOROPEN)) {
         showMessage(249);
         return true;
     }
 }
 if (room==47 && verb==3) {
-    if (isOn(48)) {
+    if (isOn(SCIENCEDOOROPEN)) {
         gotoRoom(48);
         return true;
     }
@@ -1124,6 +1125,24 @@ if (room==47 && verb==33) {
         return true;
     }
 }
+
+
+if (room ==48 && (verb == 47 || verb == 33) && noun == 42) {
+        if (isOn(COORDSENTERED)) {
+            showMessage(215);
+            hold(200);
+            putchar('\n');
+            showMessage(218);
+            putchar('\n');
+            putchar('\n');
+            room = 11;
+            lastRoom = room;
+            getRoom(room);
+
+            return 1;
+        }
+    }
+
 if (room==48 && verb==20 && noun==0) {
     if (! isOn(40)) {
         showMessage(247);
@@ -1180,6 +1199,12 @@ if (verb==13) {
 }
 if (verb==14) {
     showInventory();
+    return true;
+}
+
+if (verb==15) {
+    exitFlag=1;  
+    gotoRoom(1);
     return true;
 }
 if (verb==18) {
@@ -1298,12 +1323,12 @@ if (verb==23 && noun==29) {
         return true;
     }
 }
-if (verb==28 && noun==34 && nounTwo==35 && available(room,1)) {
+if ((verb==28 && ((noun==34 && nounTwo==35) || (noun==35 && nounTwo==34))) && available(room,1)) {
     on(GPSON);
     showMessage(16);
     return true;
 }
-if (verb==28 && noun==34 && nounTwo==36 && available(room,1)) {
+if ((verb==28 && ((noun==34 && nounTwo==36) || (noun==36 && nounTwo==34))) && available(room,1)) {
     off(GPSON);
     showMessage(16);
     return true;

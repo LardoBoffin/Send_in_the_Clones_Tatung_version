@@ -10,6 +10,7 @@ switch dark to room based environment variable
 
 status should give clone number
 
+skip nouns where the numbers match existing nouns, e.g.  SHOOT PLASMA RIFLE WITH LASER, RIFLE should be ignored
 
 
 

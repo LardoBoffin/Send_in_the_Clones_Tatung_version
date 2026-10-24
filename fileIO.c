@@ -363,7 +363,7 @@ void saveGame() {
   int i, c, carryWeight, maxEnc;
   FILE * fileptr;
   printf("Saving game...");
-  fileptr = fopen("SAVEM.DAT", "w");
+  fileptr = fopen("SAVEM.DAT", "wb");
   if (fileptr == NULL) {
     printf("Could not save game!\n");
     return;
@@ -401,7 +401,7 @@ void loadGame(char * filename) {
   FILE * fileptr;
 
   if (filename == "NEWGAME.DAT") {
-    printf("Start a new game...\n");
+    printf("Starting a new game...\n");
   } else {
     printf("Loading game...\n");
   }
