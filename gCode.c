@@ -531,6 +531,10 @@ if (room==4) {
 if (room==7) {
     if (! isOn(PLASMA)) {
         showMessage(83);
+        if (get(MUTATION)==2) {
+            showMessage(86);
+            setAchievements(1);
+        }
     }
 }
 if (room==8) {
@@ -567,7 +571,7 @@ if (room==21) {
         showMessage(166);
     }
 }
-if (room==22) {
+if (room==22 || room==28) {
     if (isOn(BOATREADY) && get(BOATPOSITION)==22) {
         showMessage(90);
     }
@@ -678,7 +682,7 @@ void beforeRoomDescription() {
 int beforePlayerInput() {
   //event fires before player input
 
-  rmshowMessage();
+  
 
 if (room==13 || room==16 || room==17 || room==18 || room==29 || room==30 || room==32 || room==33) {
     if (rndEnc()) {
@@ -742,7 +746,7 @@ if (room==7) {
     }
 }
 if (room==19) {
-    if (! isOn(LIGHT) && rn(100)>=70) {
+    if (!isOn(LIGHT) && rn(100)>=70 && available(room,6)) {
         showMessage(157);
         setAchievements(10);
         die();
@@ -750,7 +754,7 @@ if (room==19) {
     }
 }
 if (room==21) {
-    if (! isOn(GPSON) && !isOn(FORESTMAZE) && rn(100)>=90) {
+    if (!isOn(GPSON) && !isOn(FORESTMAZE) && rn(100)>=90) {
         showMessage(114);
         setAchievements(4);
         die();
@@ -871,13 +875,6 @@ if (room==6 && (verb==46 || verb==33) && noun==11) {
         return true;
     }
 }
-if (room==7 && verb==24 && noun==30 && adverb==1 && nounTwo==1) {
-    if (available(room,1) && !isOn(PLASMA) && get(MUTATION)==2) {
-        showMessage(86);
-        setAchievements(1);
-        return true;
-    }
-}
 if (room==7 && verb==24 && noun==30 && adverb==0 && nounTwo==0) {
     if (!isOn(PLASMA)) {
         showMessage(84);
@@ -887,7 +884,7 @@ if (room==7 && verb==24 && noun==30 && adverb==0 && nounTwo==0) {
     }
 }
 if (room==7 && verb==24 && noun==30 && adverb==1 && nounTwo==1) {
-    if (available(room,1) && !isOn(PLASMA) && get(MUTATION)!=2) {
+    if (available(room,1) && !isOn(PLASMA)) {
         showMessage(85);
         on(PLASMA);
         stg(2);
@@ -943,7 +940,7 @@ if (room==14 && verb==27 && noun==28) {
     }
 }
 if (room==19 && verb==20) {
-    if (isOn(LIGHT)) {
+    if (isOn(LIGHT) && available(room,6)) {
         on(ALCOVE);
         showMessage(156);
         return true;
@@ -960,20 +957,20 @@ if (room==21) {
         return true;
     }
 }
-if (room==28 && verb==3) {
-    if (get(BOATPOSITION)==22) {
-        showMessage(94);
-        setAchievements(9);
-        die();
-        return true;
-    }
-}
-if (room==28 && verb==3) {
-    if (get(BOATPOSITION)==27) {
-        gotoRoom(26);
-        return true;
-    }
-}
+// if (room==28 && verb==4) {
+//     if (get(BOATPOSITION)==22) {
+//         showMessage(94);
+//         setAchievements(9);
+//         die();
+//         return true;
+//     }
+// }
+// if (room==28 && verb==4) {
+//     if (get(BOATPOSITION)==27) {
+//         gotoRoom(26);
+//         return true;
+//     }
+// }
 if (room==22) {
     if (rm22()) {
         return true;
@@ -1074,6 +1071,7 @@ if (room==45 && verb==33 && noun==5) {
             showMessage(262);
             setAchievements(8);
             on(RUBBLECLEARED);
+            moveObject(5,0);
             return true;
         }
         else
@@ -1144,14 +1142,15 @@ if (room ==48 && (verb == 47 || verb == 33) && noun == 42) {
     }
 
 if (room==48 && verb==20 && noun==0) {
-    if (! isOn(40)) {
+    if (! isOn(CHIPFOUND)) {
         showMessage(247);
         moveObject(13,48);
+        on(CHIPFOUND);
         return true;
     }
 }
 if (room==48 && verb==4) {
-    if (! isOn(43)) {
+    if (! isOn(SCIENCEDOOROPEN)) {
         showMessage(249);
         return true;
     }
@@ -1166,7 +1165,7 @@ if (room==48 && verb==33 && noun==6) {
         showMessage(251);
         showMessage(252);
         showMessage(253);
-        on(43);
+        on(SCIENCEDOOROPEN);
         return true;
     }
 }
@@ -1276,6 +1275,12 @@ if (verb==20 && noun==7) {
         return true;
     }
 }
+if (verb==20 && noun==8) {
+    if (available(room,8)) {
+        showMessage(206);
+        return true;
+    }
+}
 if (verb==20 && noun==9) {
     if (available(room,9)) {
         showMessage(174);
@@ -1312,7 +1317,7 @@ if (verb==22 && noun==2) {
     }
 }
 if (verb==22 && noun==4) {
-    showMessage(113);
+    showMessage(205);
     return true;
 }
 if (verb==23 && noun==29) {
@@ -1352,7 +1357,7 @@ if (verb==32 && noun==6) {
     }
 }
 if (verb==33 && noun==26) {
-    if (isOn(GPSON) && available(room,1)) {
+    if (isOn(GPSON) && available(room,1) && get(MUTATION)==3) {
         showMessage(163);
         showMessage(164);
         setAchievements(15);
@@ -1361,7 +1366,7 @@ if (verb==33 && noun==26) {
     }
 }
 if (verb==33 && noun==26) {
-    if (! isOn(GPSON)) {
+    if (! isOn(GPSON) && get(MUTATION)==3) {
         showMessage(163);
         return true;
     }

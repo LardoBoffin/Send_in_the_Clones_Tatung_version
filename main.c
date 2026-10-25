@@ -412,13 +412,6 @@ void parseText() {
     putchar('\n');
   }
 
-  /* check for *cat or *. and call directly */
-  if (strncmp("*.", message, 2) == 0 || strncmp("*C", message, 2) == 0) {
-    //oscli("*CAT");
-    doneFlag = true;
-    return;
-  }
-
   if (strncmp("DEBUG", message, 5) == 0) {
     debug = true;
     return;
@@ -462,7 +455,13 @@ void parseText() {
 
     if (nounTwo == 0 && parsed == false) {
       nounTwo = parseWord(NOUN);
-    }
+      if (nounTwo > 0) {
+        parsed = true;
+      }
+      if (nounTwo == noun){
+        nounTwo = 0;
+      }
+  }
 
   }
   if (debug == true) {
@@ -553,6 +552,7 @@ int main() {
         lastRoom = room;
         cls();
         getRoom(room);
+        rmshowMessage();
         setTurn(1);
       }
 

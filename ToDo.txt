@@ -8,9 +8,10 @@ load and process a file containing commands to speed up testing
 
 switch dark to room based environment variable
 
-status should give clone number
+refine room 7 so you get feedback if you can't shoot the rifle due to lack of skills? Or just get rid of the mutation thing?
 
-skip nouns where the numbers match existing nouns, e.g.  SHOOT PLASMA RIFLE WITH LASER, RIFLE should be ignored
+
+
 
 
 
