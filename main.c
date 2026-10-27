@@ -412,10 +412,10 @@ void parseText() {
     putchar('\n');
   }
 
-  if (strncmp("DEBUG", message, 5) == 0) {
-    debug = true;
-    return;
-  }
+  // if (strncmp("DEBUG", message, 5) == 0) {
+  //   debug = true;
+  //   return;
+  // }
 
   /*break text into individual words*/
   x = 0;

@@ -159,13 +159,11 @@ void die() {
   gotoRoom(1);
 }
 
-
-
 int rm10(void)
 {
     int ST = get(CURRENTSTAGE);
 
-    if (verb == 20 && ST == 1) {
+    if (verb == 20 && noun==38 && ST == 1) {
         showMessage(128);
         showMessage(183);
         showMessage(184);
@@ -173,44 +171,44 @@ int rm10(void)
         return 1;
     }
 
-    if (verb == 20 && ST == 2) {
+    if (verb == 20 && noun==38 && ST == 2) {
         showMessage(128);
         showMessage(185);
         return 1;
     }
 
-    if (verb == 20 && ST == 3) {
+    if (verb == 20 && noun==38 && ST == 3) {
         showMessage(128);
         showMessage(189);
         return 1;
     }
 
-    if (verb == 20 && ST == 4) {
+    if (verb == 20 && noun==38 && ST == 4) {
         showMessage(128);
         showMessage(186);
         return 1;
     }
 
-    if (verb == 20 && ST == 5) {
+    if (verb == 20 && noun==38 && ST == 5) {
         showMessage(128);
         showMessage(187);
         return 1;
     }
 
-    if (verb == 20 && ST == 6) {
+    if (verb == 20 && noun==38 && ST == 6) {
         showMessage(128);
         showMessage(190);
         showMessage(191);
         return 1;
     }
 
-    if (verb == 20 && ST == 7) {
+    if (verb == 20 && noun==38 && ST == 7) {
         showMessage(128);
         showMessage(192);
         return 1;
     }
 
-    if (verb == 20 && ST > 7) {
+    if (verb == 20 && noun==38 && ST > 7) {
         if (get(MUTATION) != 2) {
             showMessage(128);
             showMessage(193);
@@ -222,7 +220,7 @@ int rm10(void)
         }
     }
 
-    if (verb == 20 && ST > 7) {
+    if (verb == 20 && noun==38 && ST > 7) {
         showMessage(128);
         showMessage(193);
         showMessage(201);
@@ -249,8 +247,9 @@ int rm11(void)
             on(TELEPORTERPATCHED);
             on(COORDSENTERED);
             showMessage(209);
-            return 1;
-        }
+            showMessage(221);
+                return 1;
+            }
     }
 
     //install co-ords if player has gps and patch and teleporter patched
@@ -259,6 +258,8 @@ int rm11(void)
             && isOn(TELEPORTERPATCHED) && !isOn(COORDSENTERED) && isOn(GPSTAKEN)) {
             on(COORDSENTERED);
             showMessage(329);
+            showMessage(221);
+            return 1;   
         }
     }
 
@@ -305,31 +306,6 @@ int rm11(void)
 
     return 0;
 }
-
-
-// void l1(void)
-// {
-//     showMessage(204);
-//     putchar('\n');
-//     showMessage(205);
-//     putchar('\n');
-//     showMessage(206);
-//     putchar('\n');
-//     showMessage(207);
-// }
-
-
-// void l2(void)
-// {
-//     showMessage(210);
-//     putchar('\n');
-//     showMessage(211);
-//     putchar('\n');
-//     showMessage(212);
-//     putchar('\n');
-//     showMessage(207);
-// }
-
 
 int rm21(void)
 {
@@ -427,8 +403,6 @@ int rm22(void)
 
     return 0;
 }
-
-
 
 void rndshowMessage(){
     int r;
@@ -545,11 +519,7 @@ if (room==8) {
         showMessage(127);
     }
 }
-//if (room==12) {
-//    if (get(SOCEITY)==4) {
-//        showMessage(82);
-//    }
-//}
+
 if (room==13) {
     if (get(SOCEITY)==4 || get(SKILL)==3) {
         showMessage(92);
@@ -581,16 +551,7 @@ if (room==22) {
         showMessage(91);
     }
 }
-// if (room==27) {
-//     if (get(BOATPOSITION)==27) {
-//         showMessage(90);
-//     }
-// }
-if (room==28) {
-    if (get(BOATPOSITION)==22) {
-        showMessage(90);
-    }
-}
+
 if (room==39) {
     if (get(DOORLOCKED)==1) {
         showMessage(165);
@@ -608,7 +569,6 @@ if (room==48) {
 }
     return;
 }
-
 
 void win(void) {
     int S = 0, L = 0;
@@ -681,8 +641,6 @@ void beforeRoomDescription() {
 
 int beforePlayerInput() {
   //event fires before player input
-
-  
 
 if (room==13 || room==16 || room==17 || room==18 || room==29 || room==30 || room==32 || room==33) {
     if (rndEnc()) {
@@ -822,15 +780,15 @@ int afterPlayerInput() {
 	//return 0 if no time taken, e.g. load or save.
 	//return 1+ if time taken. Return will be added to the current turn (a slow action could take 2 or more turns)
 	
- if (verb==21 && noun==32) {
-    set(SOCEITY,4);
-    on(SKILL);
-    on(MUTATION);
-    on(BRIEFING);
-    on(PLASMA);
-    gotoRoom(4);
-    return true;
-}
+//  if (verb==21 && noun==32) {
+//     set(SOCEITY,4);
+//     on(SKILL);
+//     on(MUTATION);
+//     on(BRIEFING);
+//     on(PLASMA);
+//     gotoRoom(4);
+//     return true;
+// }
 if (room==1 && verb==21 && noun>15 && noun<20) {
     off(BEENOUTSIDE);
     set(SOCEITY,noun-15);
@@ -853,7 +811,7 @@ if (room==4 && verb==20) {
         return true;
     }
 }
-if (room==4 && verb==20) {
+if (room==4 && verb==20 && noun==31) {
     if (! isOn(CUPBOARDOPEN)) {
         on(CUPBOARDOPEN);
         showMessage(96);
@@ -921,7 +879,9 @@ if (room==11) {
         return true;
     }
 }
-if (room==13 && (verb==5 || verb==26)) {
+
+//only climb on its own works
+if (room==13 && (verb==5 || verb==26) && (noun==0 || noun==14)) {
     if (get(SOCEITY)==4 || get(SKILL)==3) {
         gotoRoom(14);
         return true;
@@ -957,20 +917,7 @@ if (room==21) {
         return true;
     }
 }
-// if (room==28 && verb==4) {
-//     if (get(BOATPOSITION)==22) {
-//         showMessage(94);
-//         setAchievements(9);
-//         die();
-//         return true;
-//     }
-// }
-// if (room==28 && verb==4) {
-//     if (get(BOATPOSITION)==27) {
-//         gotoRoom(26);
-//         return true;
-//     }
-// }
+
 if (room==22) {
     if (rm22()) {
         return true;
@@ -983,7 +930,7 @@ if (room==39 && verb==2) {
     }
 }
 if (room==39) {
-    if (!isOn(TURRETDEAD) && verb==34) {
+    if (!isOn(TURRETDEAD) && verb==34 && noun==38) {
         showMessage(160);
         showMessage(161);
         on(DOORLOCKED);
@@ -1032,7 +979,7 @@ if (room==41 && verb==20 && noun==0) {
         return true;
     }
 }
-if (room==43 && verb==24) {
+if (room==43 && verb==24 && noun==41) {
     if (available(room,1) && (get(SKILL)==2 || get(SOCEITY)==2 || get(MUTATION)==1) && !isOn(BOTDEAD)) {
         showMessage(176);
         on(BOTDEAD);
@@ -1110,7 +1057,7 @@ if (room==47 && verb==3) {
         return true;
     }
 }
-if (room==47 && verb==33) {
+if (room==47 && verb==3 && noun==7) {
     if (available(room,7) && !isOn(KEYCARDACTIVE)) {
         showMessage(265);
         return true;
@@ -1123,23 +1070,6 @@ if (room==47 && verb==33) {
         return true;
     }
 }
-
-
-if (room ==48 && (verb == 47 || verb == 33) && noun == 42) {
-        if (isOn(COORDSENTERED)) {
-            showMessage(215);
-            hold(200);
-            putchar('\n');
-            showMessage(218);
-            putchar('\n');
-            putchar('\n');
-            room = 11;
-            lastRoom = room;
-            getRoom(room);
-
-            return 1;
-        }
-    }
 
 if (room==48 && verb==20 && noun==0) {
     if (! isOn(CHIPFOUND)) {
@@ -1201,12 +1131,17 @@ if (verb==14) {
     return true;
 }
 
-if (verb==15) {
+if (verb==15 && noun==0) {
     exitFlag=1;  
     gotoRoom(1);
     return true;
 }
-if (verb==18) {
+if (verb==18 && noun==0) {
+    if (room==43 || room==48){
+        //prevent saving here to avoid ruining the save game if the player gets stuck
+        showMessage(212);
+        return true;
+    }
     saveGame();
     return true;
 }
@@ -1305,6 +1240,15 @@ if (verb==20 && noun==13) {
         return true;
     }
 }
+
+if (verb==20 && noun <14) {
+    if (!available(room,noun)) {
+        showMessage(9);
+        return true;
+    }
+}
+
+//catch all other objects that are not in the room or inventory
 if (verb==20) {
     showMessage(178);
     return true;
@@ -1317,7 +1261,11 @@ if (verb==22 && noun==2) {
     }
 }
 if (verb==22 && noun==4) {
-    showMessage(205);
+    if (available(room,4)) {
+        showMessage(205);}
+    else{
+        showMessage(8);
+    }
     return true;
 }
 if (verb==23 && noun==29) {

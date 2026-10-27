@@ -10,6 +10,7 @@ switch dark to room based environment variable
 
 refine room 7 so you get feedback if you can't shoot the rifle due to lack of skills? Or just get rid of the mutation thing?
 
+east bank shows boat message twice? Does when not sierra
 
 
 
