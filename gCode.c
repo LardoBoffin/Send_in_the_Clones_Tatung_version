@@ -1241,7 +1241,7 @@ if (verb==20 && noun==13) {
     }
 }
 
-if (verb==20 && noun <14) {
+if (verb==20 && (noun <14 && noun>0)) {
     if (!available(room,noun)) {
         showMessage(9);
         return true;
