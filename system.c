@@ -217,8 +217,8 @@ void cls() {
   }
 }
 
-void hold(int duration) {
-  int p, t;
+void hold(long duration) {
+  long p, t;
   for (p = 0; p < duration * 1000; p++) {
     t = p * 10;
     t = p / 10;

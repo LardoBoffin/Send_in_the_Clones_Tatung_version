@@ -156,6 +156,7 @@ void die() {
   }
   printf("\n");
   WaitForKey(); 
+  andMessage[0] = '\0';
   gotoRoom(1);
 }
 
@@ -163,7 +164,7 @@ int rm10(void)
 {
     int ST = get(CURRENTSTAGE);
 
-    if (verb == 20 && noun==38 && ST == 1) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 1) {
         showMessage(128);
         showMessage(183);
         showMessage(184);
@@ -171,44 +172,44 @@ int rm10(void)
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST == 2) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 2) {
         showMessage(128);
         showMessage(185);
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST == 3) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 3) {
         showMessage(128);
         showMessage(189);
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST == 4) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 4) {
         showMessage(128);
         showMessage(186);
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST == 5) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 5) {
         showMessage(128);
         showMessage(187);
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST == 6) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 6) {
         showMessage(128);
         showMessage(190);
         showMessage(191);
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST == 7) {
+    if (verb == 20 && (noun==38 || noun==43) && ST == 7) {
         showMessage(128);
         showMessage(192);
         return 1;
     }
 
-    if (verb == 20 && noun==38 && ST > 7) {
+    if (verb == 20 && (noun==38 || noun==43) && ST > 7) {
         if (get(MUTATION) != 2) {
             showMessage(128);
             showMessage(193);
@@ -220,7 +221,7 @@ int rm10(void)
         }
     }
 
-    if (verb == 20 && noun==38 && ST > 7) {
+    if (verb == 20 && (noun==38 || noun==43) && ST > 7) {
         showMessage(128);
         showMessage(193);
         showMessage(201);
@@ -396,7 +397,7 @@ int rm22(void)
         return 1;
     }
 
-    if (isOn(BOATREADY) && verb == 3) {// && get(BOATPOSITION) == 22
+    if (isOn(BOATREADY) && verb == 3) {
         gotoRoom(49);
         return 1;
     }
@@ -899,7 +900,7 @@ if (room==14 && verb==27 && noun==28) {
         return true;
     }
 }
-if (room==19 && verb==20) {
+if (room==19 && verb==20 && noun==0) {
     if (isOn(LIGHT) && available(room,6)) {
         on(ALCOVE);
         showMessage(156);
@@ -965,7 +966,14 @@ if (room==40 && verb==20 && noun==0) {
     return true;
 }
 if (room==41 && verb==20 && noun==0) {
-    if ((get(SOCEITY)==1 || get(SKILL)==1) && !isOn(PATCHFOUND) && available(room,12)) {
+    if ((get(SOCEITY)==1 || get(SKILL)==1) && !isOn(PATCHFOUND)) {
+
+        if (!available(room,12)){
+            showMessage(197);
+            showMessage(226);
+            return true;
+        }
+
         showMessage(197);
         showMessage(198);
         on(PATCHFOUND);
@@ -987,7 +995,7 @@ if (room==43 && verb==24 && noun==41) {
         return true;
     }
 }
-if (room==43 && verb==24 && !isOn(BOTDEAD)) {
+if (room==43 && verb==24 && noun==41 && !isOn(BOTDEAD)) {
     if (available(room,1)) {
         showMessage(177);
         die();
@@ -1013,6 +1021,11 @@ if (room==44 && verb==20 && noun==0) {
     }
 }
 if (room==45 && verb==33 && noun==5) {
+    if(!available(room,6)){
+        showMessage(224);
+        return true;
+    }
+
     if (available(room,5) && !isOn(RUBBLECLEARED) && available(room,6)) {
         if (get(SOCEITY)==3){
             showMessage(262);
@@ -1037,7 +1050,11 @@ if (room==45 && verb==2 && isOn(RUBBLECLEARED)) {
     return true;
 }
 if (room==47 && (noun==37 || noun==34 || nounTwo==37 || nounTwo==34) && (verb==37 || verb==11 || verb==18)) {
-    if (available(room,1) && available(room,12) && isOn(GPSON)) {
+    if (available(room,1) && available(room,12)) {
+        if (!isOn(GPSON)){
+            showMessage(223);    
+            return true;
+        }
         on(GPSTAKEN);
         showMessage(202);
         stg(9);
@@ -1047,6 +1064,11 @@ if (room==47 && (noun==37 || noun==34 || nounTwo==37 || nounTwo==34) && (verb==3
 }
 if (room==47 && verb==3) {
     if (! isOn(SCIENCEDOOROPEN)) {
+
+        if(get(SKILL)==4){
+            showMessage(227);
+            return true;
+        }
         showMessage(249);
         return true;
     }
@@ -1057,7 +1079,7 @@ if (room==47 && verb==3) {
         return true;
     }
 }
-if (room==47 && verb==3 && noun==7) {
+if (room==47 && verb==33 && noun==7) {
     if (available(room,7) && !isOn(KEYCARDACTIVE)) {
         showMessage(265);
         return true;
@@ -1099,7 +1121,7 @@ if (room==48 && verb==33 && noun==6) {
         return true;
     }
 }
-if (room==50 && verb==20) {
+if (room==50 && verb==20 && noun==0) {
     showMessage(263);
     return true;
 }
@@ -1109,15 +1131,27 @@ if (room==50 && (verb==33 || verb==46 || verb==47) && noun==7 && available(room,
     stg(7);
     return true;
 }
-if (verb==11 && noun<16) {
+if (verb==11 && noun<16 && noun > 0) {
+
+    if (noun==10 && nounTwo==13){
+        //take the strange chip
+        takeObject(nounTwo);
+        return false;
+    }
+
     takeObject(noun);
+
+    if(noun==3){
+        //rope taken so untie it if it was tied to the boat 
+        off(ROPETIED);
+    }
     return true;
 }
 if (verb==11 && noun==16) {
     takeObject(12);
     return true;
 }
-if (verb==12 && noun<16) {
+if (verb==12 && noun<16 && noun > 0) {
     dropObject(noun);
     return true;
 }
@@ -1137,7 +1171,7 @@ if (verb==15 && noun==0) {
     return true;
 }
 if (verb==18 && noun==0) {
-    if (room==43 || room==48){
+    if (room==39 || room==48){
         //prevent saving here to avoid ruining the save game if the player gets stuck
         showMessage(212);
         return true;
@@ -1304,6 +1338,13 @@ if (verb==32 && noun==6) {
         return true;
     }
 }
+
+if (verb==33 && noun==8){
+    //cannot use the medikit
+    showMessage(228);
+    return false;
+}
+
 if (verb==33 && noun==26) {
     if (isOn(GPSON) && available(room,1) && get(MUTATION)==3) {
         showMessage(163);

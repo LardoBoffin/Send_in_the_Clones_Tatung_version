@@ -38,7 +38,8 @@ int noun, nounTwo, oldNoun, verb, adverb, object, turn, room, objn, achn, doneFl
 //int noun, nounTwo, oldNoun, verb, adverb, object, turn, room, objn, achn, doneFlag;
 int nounNumber, verbNumber, adverbNumber, randomNumber, exitFlag, andActive;
 int lastRoom, playerLocation, clear, numLinks, screenWidth, objectFileSize;
-char * objectList, links[36], * ach, * nouns, * verbs, * adverbs, * sysMessages;
+unsigned char * objectList;
+char links[36], * ach, * nouns, * verbs, * adverbs, * sysMessages;
 char message[STRINGSIZE], word[WORDSIZE], andMessage[STRINGSIZE], gameTitle[STRINGSIZE];
 int debug;
 int numSysMessages;
@@ -70,6 +71,7 @@ void takeObject(int number) {
 
   if (objectHere(number, room) == 0) {
     showMessage(CantFindThat);
+    setTurn(-1);
     andActive = false;
     andMessage[0] = '\0';
     return;
@@ -84,7 +86,7 @@ void takeObject(int number) {
 
   setObjectLocation(number, playerLocation);
   showMessage(16);
-  setTurn(1);
+ // setTurn(1);
   setStat(ENC, getStat(ENC) + objWeight);
   if (debug == true) {
     // puts("Max enc %5d, carried %5d\n", getStat(MAXENC), getStat(ENC));
@@ -97,13 +99,14 @@ void dropObject(int number) {
 
   if (objectHere(number, playerLocation) == 0) {
     showMessage(YouDontHaveIt);
+    setTurn(-1);
     andActive = false;
     andMessage[0] = '\0';
     return;
   }
   setObjectLocation(number, room);
   showMessage(Okay);
-  setTurn(1);
+ // setTurn(1);
 
   cw = getStat(ENC) - objectWeight(number);
   if (cw < 0) {
@@ -170,11 +173,11 @@ void listObjects(int roomNumber, int messageNumber) {
   /*check for objects at location */
   for (x = 1; x <= objn; x++) {
     message = objectHere(x, roomNumber);
-    if (message >> 0) {
+    if (message > 0) {
       numHere++;
     }
   }
-  if (numHere == 0 && messageNumber >> 1) {
+  if (numHere == 0 && messageNumber > 1) {
     putchar('\n');
     return;
   }
@@ -192,7 +195,7 @@ void listObjects(int roomNumber, int messageNumber) {
   /*print objects at location */
   for (x = 1; x <= objn; x++) {
     message = objectHere(x, roomNumber);
-    if (message >> 0) {
+    if (message > 0) {
       showMessage(message);
       putchar('\n');
     }
@@ -387,7 +390,7 @@ void parseText() {
   /*check for " AND " */
   andPos = strstr(message, " AND ") - message;
 
-  if (andPos > 0) {
+  if (andPos != NULL && andPos > 0) {
     /* AND is present with spaces before and after */
     andPos = andPos + 5;
     /*puts("position of AND is %d",andPos);*/
@@ -420,7 +423,7 @@ void parseText() {
   /*break text into individual words*/
   x = 0;
 
-  while (x < slen - 1) {
+  while ((x < slen - 1) && x < 50) {
     wl = 0;
     while (message[x + wl] != ' ' && x + wl < slen - 1) {
       word[wl] = message[x + wl];
@@ -505,7 +508,6 @@ int main() {
   screenWidth = 39;
 
   puts(gameTitle);
-  puts("\n");
 
   puts("Press 1 to start a new game.\n");
   puts("Press 2 to continue a saved game.\n");
@@ -562,6 +564,7 @@ int main() {
       if (exitFlag == 0 && doneFlag == 0) {
         parseText();
       }
+
       if (verb == 0 && exitFlag == 0 && doneFlag == 0) {
         //does not increment the current turn
         showMessage(Pardon);

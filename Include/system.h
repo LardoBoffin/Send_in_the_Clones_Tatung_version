@@ -6,7 +6,7 @@
 #define true 1
 #define false 0
 #define STRINGSIZE 256
-#define WORDSIZE 50
+#define WORDSIZE 100
 #define YouAreCarrying 1
 #define WhatNow 2
 #define YouCant 3
@@ -93,7 +93,7 @@ void reverse(char *,int,int);
 void reverseUpper(char *,int,int);
 void toUpperCase(char *);
 void cls(void);
-void hold(int);
+void hold(long);
 int checkMove(void);
 void initialiseGame(void);
 void exitGame(void);
