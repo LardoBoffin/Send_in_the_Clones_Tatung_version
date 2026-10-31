@@ -655,10 +655,10 @@ if (room==4) {
     }
 }
 if (isOn(LATECTR) && !isOn(BRIEFING)) {
-    inc(7);
+    inc(LATECTR);
 }
 if (room==5) {
-    if (get(LATECTR)<6 && !isOn(BRIEFING)) {
+    if (turn <= 10 && !isOn(BRIEFING)) {
         on(BRIEFING);
         inc(31);
         showMessage(78);
@@ -679,7 +679,7 @@ if (room==5) {
     }
 }
 if (room==5) {
-    if (get(LATECTR)>3 && !isOn(BRIEFING)) {
+    if (turn > 10 && !isOn(BRIEFING)) {
         off(LATECTR);
         showMessage(71);
         showMessage(75);
@@ -1362,6 +1362,7 @@ if (verb==33 && noun==26) {
 }
 if (verb==35 && room<4) {
     showMessage(317);
+    turn-=1;
     return true;
 }
 if (verb==35 && room>3) {
@@ -1374,6 +1375,7 @@ if (verb==35 && room>3) {
     showMessage(182);
     showMessage(122+get(MUTATION));
     printf("\nYou are Clone %d of 8.\n", get(CLONE));
+    turn-=1;
     return true;
 }
 if (verb==48 && noun==10) {
