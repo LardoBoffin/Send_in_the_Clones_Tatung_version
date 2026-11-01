@@ -154,6 +154,7 @@ void die() {
         showMessage(76);
         exitFlag=1;
   }
+  off(DOORLOCKED);
   printf("\n");
   WaitForKey(); 
   andMessage[0] = '\0';
@@ -213,7 +214,7 @@ int rm10(void)
         if (get(MUTATION) != 2) {
             showMessage(128);
             showMessage(193);
-            hold(100);
+            //hold(100);
             showMessage(200);
             setAchievements(5);
             die();
@@ -268,7 +269,7 @@ int rm11(void)
     if ((verb == 47 || verb == 33) && noun == 42) {
         if (isOn(COORDSENTERED)) {
             showMessage(215);
-            hold(200);
+            //hold(200);
             putchar('\n');
             showMessage(218);
             putchar('\n');
@@ -658,7 +659,7 @@ if (isOn(LATECTR) && !isOn(BRIEFING)) {
     inc(LATECTR);
 }
 if (room==5) {
-    if (turn <= 10 && !isOn(BRIEFING)) {
+    if (turn <= 14 && !isOn(BRIEFING)) {
         on(BRIEFING);
         inc(31);
         showMessage(78);
@@ -679,7 +680,7 @@ if (room==5) {
     }
 }
 if (room==5) {
-    if (turn > 10 && !isOn(BRIEFING)) {
+    if (turn > 14 && !isOn(BRIEFING)) {
         off(LATECTR);
         showMessage(71);
         showMessage(75);
@@ -1085,7 +1086,7 @@ if (room==47 && verb==33 && noun==7) {
         return true;
     }
 }
-if (room==47 && verb==33) {
+if (room==47 && verb==33 && noun==7) {
     if (available(room,7) && isOn(KEYCARDACTIVE)) {
         showMessage(266);
         setAchievements(7);

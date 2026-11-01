@@ -397,7 +397,7 @@ void saveGame() {
 void loadGame(char * filename) {
 
   int i;
-  unsigned char carryWeight, maxEnc;
+  int carryWeight, maxEnc;
   FILE * fileptr;
 
   if (filename == "NEWGAME.DAT") {
